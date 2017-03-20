@@ -15,31 +15,36 @@
 //    and submit it to the grader.
 
 int fibonacci_naive(int n) {
-    if (n <= 1)
-        return n;
-
-    return fibonacci_naive(n - 1) + fibonacci_naive(n - 2);
+  if (n <= 1)
+    return n;
+  return fibonacci_naive(n - 1) + fibonacci_naive(n - 2);
 }
 
 int fibonacci_fast(int n) {
-    // write your code here
-
+  if(n==0)
     return 0;
+  int a = 1;
+  int b = 1;
+  for(int i = 2; i < n ; i++){
+    int t = b;
+    b = a;
+    a = a+t;
+  }
+  return a;
 }
-
 void test_solution() {
     assert(fibonacci_fast(3) == 2);
     assert(fibonacci_fast(10) == 55);
-    for (int n = 0; n < 20; ++n)
-        assert(fibonacci_fast(n) == fibonacci_naive(n));
+    for (int n = 0; n < 20; ++n) {
+      std::cerr<<"n = " <<n<<":"<<fibonacci_fast(n)<<":"<<fibonacci_naive(n) <<std::endl;
+      assert(fibonacci_fast(n) == fibonacci_naive(n));
+    }
 }
 
 int main() {
     int n = 0;
     std::cin >> n;
 
-    std::cout << fibonacci_naive(n) << '\n';
-    //test_solution();
-    //std::cout << fibonacci_fast(n) << '\n';
+    std::cout << fibonacci_fast(n) << '\n';
     return 0;
 }

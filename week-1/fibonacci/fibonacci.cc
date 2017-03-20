@@ -20,13 +20,13 @@ int fibonacci_naive(int n) {
   return fibonacci_naive(n - 1) + fibonacci_naive(n - 2);
 }
 
-int fibonacci_fast(int n) {
+long long fibonacci_fast(int n) {
   if(n==0)
     return 0;
-  int a = 1;
-  int b = 1;
+  long long a = 1;
+  long long b = 1;
   for(int i = 2; i < n ; i++){
-    int t = b;
+    long long t = b;
     b = a;
     a = a+t;
   }

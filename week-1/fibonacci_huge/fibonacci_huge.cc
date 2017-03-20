@@ -33,13 +33,8 @@ long long get_fibonacci_huge_naive(long long n, long long m) {
 }
 
 int main() {
-    long long n, m;
-    std::cin >> n >> m;
-    std::cout << get_fibonacci_huge_fast(n, m) << '\n';
+  long long n, m;
+  std::cin >> n;
+  std::cout << get_fibonacci_huge_fast(n, 10) << '\n';
 
-    // for(int i =0 ; i < 10000; i++) {
-    //   std::cerr<<"i="<<i<<std::endl;
-    //   std::cerr<<get_fibonacci_huge_naive(i,10) <<":"<< get_fibonacci_huge_fast(i,10)<<std::endl;
-    //   assert(get_fibonacci_huge_naive(i,10) == get_fibonacci_huge_fast(i,10));
-    //    }
 }

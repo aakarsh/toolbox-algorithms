@@ -2,7 +2,7 @@
 
 int get_change(int m) {
   //write your code here
-  return n;
+  return m;
 }
 
 int main() {

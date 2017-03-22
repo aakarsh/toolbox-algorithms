@@ -7,6 +7,13 @@
 using std::vector;
 using std::pair;
 
+
+#ifdef DEBUG
+const bool debug = true;
+#else
+const bool debug = false;
+#endif
+
 bool compare_first(const pair<int,int> &p1,const pair<int,int> &p2) {
   return p1.first <= p2.first;
 }
@@ -18,20 +25,23 @@ int binary_search(const vector<int> &input, int x) {
     a[i] = std::make_pair(input[i],i);
 
   std::sort(a.begin(),a.end(),compare_first);
-  
-  //for(int i = 0 ; i< input.size(); i++)
-    //std::cerr<<a[i].first<<"["<<a[i].second<<"] ";
-  
-  //std::cerr<<std::endl;
+
+  if(debug) {
+    for(int i = 0 ; i< input.size(); i++)
+      std::cerr<<a[i].first<<"["<<a[i].second<<"] ";
+    std::cerr<<std::endl;
+  }  
   
   int left = 0, right = (int)a.size()-1; 
   int i = 0;
   
-  while(left < right && i < 1000) {
+  while(left <= right && i < 1000) {
     i++;
     
     int mid = (int)((left+right)/2);
-    //std::cerr<<" low "<<left<<" high "<<right<<" mid "<<mid<<" elem "<<a[mid].first<<" x "<<x<<std::endl;
+    
+    if(debug)
+      std::cerr<<" low "<<left<<" high "<<right<<" mid "<<mid<<" elem "<<a[mid].first<<" x "<<x<<std::endl;
     
     if(a[mid].first == x) {
       return mid;
@@ -41,6 +51,7 @@ int binary_search(const vector<int> &input, int x) {
       right = mid;
     }      
   }
+  
   return -1;
 }
 

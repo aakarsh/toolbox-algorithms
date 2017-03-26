@@ -29,24 +29,24 @@ int optimal_weight(int W, const vector<int> &w) {
     for(int j = 1; j <= W; j++) { // for each cur_weight
       
       // weight acheived by (0..i-1) with knapsack size j 
-      int with_cur = opt_values[i-1][j];
+      int skip_current = opt_values[i-1][j];
       
       // weight acheived by (0..i-1) with knapsack size of W-w[i-1] (cur_weights are zero index)
-      int without_cur = 0;
+      int add_current = 0;
       
       if(j >= cur_weight)
-        without_cur = opt_values[i - 1][j - cur_weight];
+        add_current = opt_values[i - 1][j - cur_weight];
       
-      if( (without_cur + cur_weight) <= j) {
-        
-        if(with_cur <= j) {
-          opt_values[i][j] = std::max(without_cur + cur_weight,with_cur);
+      if( (add_current + cur_weight) <= j) {
+
+        if(skip_current <= j) {
+          opt_values[i][j] = std::max(add_current + cur_weight,skip_current);
         } else {
-          opt_values[i][j] = without_cur + cur_weight;
+          opt_values[i][j] = add_current + cur_weight;
         }        
         
-      } else if(without_cur <= j) {
-        opt_values[i][j] = without_cur;
+      } else if(skip_current <= j) {
+        opt_values[i][j] = skip_current;
       } else {
         opt_values[i][j] = 0;
       }

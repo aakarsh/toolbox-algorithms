@@ -17,7 +17,8 @@ int optimal_weight(int W, const vector<int> &w) {
   int current_weight = 0;
 
   // Set all weights without any itmes to 0 
-  for(int i = 0; i <= W; i++) opt_values[0][i] = 0;
+  for(int i = 0; i <= W; i++) opt_values[0][i] = 0; 
+  
   // Set all knapsack with 0-weight to 0 
   for(int i = 0; i <= nitems; i++) opt_values[i][0] = 0;
 
@@ -27,23 +28,25 @@ int optimal_weight(int W, const vector<int> &w) {
     
     for(int j = 1; j <= W; j++) { // for each cur_weight
       
-      // cur_weight acheived by 0..i-1 with knapsack size j 
+      // weight acheived by (0..i-1) with knapsack size j 
       int with_cur = opt_values[i-1][j];
       
-      // cur_weight acheived by 0..i-1 with knapsack size of W-w[i-1](cur_weights are zero index)
+      // weight acheived by (0..i-1) with knapsack size of W-w[i-1] (cur_weights are zero index)
       int without_cur = 0;
       
       if(j >= cur_weight)
-        without_cur = opt_values[i-1][j-cur_weight];
+        without_cur = opt_values[i - 1][j - cur_weight];
       
-      if( without_cur+cur_weight <= j) {
+      if( (without_cur + cur_weight) <= j) {
+        
         if(with_cur <= j) {
-          opt_values[i][j] = std::max(without_cur+cur_weight,with_cur);
+          opt_values[i][j] = std::max(without_cur + cur_weight,with_cur);
         } else {
-          opt_values[i][j] = without_cur+cur_weight;
-        } 
+          opt_values[i][j] = without_cur + cur_weight;
+        }        
+        
       } else if(without_cur <= j) {
-        opt_values[i][j] = opt_values[i-1][W];
+        opt_values[i][j] = without_cur;
       } else {
         opt_values[i][j] = 0;
       }
